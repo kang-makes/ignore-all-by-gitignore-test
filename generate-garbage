@@ -1,0 +1,23 @@
+#!/bin/bash
+
+for first_level_folder in folder-{ignore,commit}-{01,02,03}-XXXXXX; do
+  first_level_folder=$(mktemp -t $first_level_folder --tmpdir=. --directory)
+  for file in file-{ignore,commit}-{01,02,03}-XXXXXX; do
+    head -c $((RANDOM / 2000)) /dev/urandom > $(mktemp --tmpdir=$first_level_folder -t $file)
+  done
+
+  for second_level_folder in folder-{ignore,commit}-{01,02,03}-XXXXXX; do
+    second_level_folder=$(mktemp -t $second_level_folder --tmpdir=$first_level_folder --directory)
+    for file in file-{ignore,commit}-{01,02,03}-XXXXXX; do
+      head -c $((RANDOM / 2000)) /dev/urandom > $(mktemp --tmpdir=$second_level_folder -t $file)
+    done
+
+    for third_level_folder in folder-{ignore,commit}-{01,02,03}-XXXXXX; do
+      third_level_folder=$(mktemp -t $third_level_folder --tmpdir=$second_level_folder --directory)
+      for file in file-{ignore,commit}-{01,02,03}-XXXXXX; do
+        head -c $((RANDOM / 2000)) /dev/urandom > $(mktemp --tmpdir=$third_level_folder -t $file)
+      done
+    done
+  done
+done
+

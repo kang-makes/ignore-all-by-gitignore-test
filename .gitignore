@@ -1,0 +1,6 @@
+/*
+!/generate-garbage
+!/.gitignore
+!/folder-commit-*/
+/folder-commit-*/*
+!/folder-commit-*/file-commit-*
